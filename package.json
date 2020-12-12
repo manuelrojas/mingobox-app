@@ -7,10 +7,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "autoprefixer": "^10.1.0",
+    "axios": "^0.21.0",
     "mongodb": "^3.5.9",
     "next": "latest",
+    "postcss": "^8.2.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-qr-code": "^1.0.3",
+    "tailwindcss": "^2.0.1"
   },
   "license": "MIT"
 }
