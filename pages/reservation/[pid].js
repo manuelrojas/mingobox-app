@@ -8,7 +8,7 @@ export default function Complete({ newUser }) {
     const user = JSON.parse(newUser);
     return (
         <div class="m-10  w-auto mx-auto max-w-3xl w-min flex flex-col  content-center bg-white shadow p-8 text-gray-700 rounded-lg">
-            <QRCode value={`/reservation/${user._id}`} />
+            <QRCode value={`https://mingobox-app.vercel.app/reservation/${user._id}`} />
             <p>Reservación</p> 
             <p>{user.name}</p>
             <p>{user.id}</p>
