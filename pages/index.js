@@ -43,37 +43,37 @@ function ListSymp() {
     <div className="flex flex-col p-3 justify-start">
         <div className="flex flex-col">
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Fiebre</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Fiebre</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Dolor de Garganta</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Dolor de Garganta</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Dolor de Cuerpo</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Dolor de Cuerpo</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Diarrea</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Diarrea</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Mocos</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Mocos</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Tos</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Tos</span>
             </label>
 
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Problemas olfato</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Problemas olfato</span>
             </label>
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Problemas olfato</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Problemas olfato</span>
             </label>
             <label className="inline-flex items-center mt-3">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" /><span className="ml-2 text-gray-700">Problemas respiratorios</span>
+                <input type="checkbox" className="form-checkbox h-5 w-5 text-purple-600" /><span className="ml-2 text-gray-700">Problemas respiratorios</span>
             </label>
         </div>
     </div>
@@ -170,10 +170,21 @@ export default function Home({ isConnected }) {
 
             <ListSymp />
             <Notes />
-          <button onClick={onSubmit} className="py-2 px-4 border-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
-            Reservar 
-          </button>
-      
+            <p className="ml-2 mt-4">
+                El firmante de esta boleta declara bajo juramento que el/la participante ha contesta con información veraz la encuesta realizada,
+                correspondiente para determinar que se encuentra en un buen estado de salud, no presenta ningún problema físico que le impida su
+                participación en los entrenamientos de boxeo y libera de la responsabilidad a la Asociación de Boxeo de Santo Domingo de cualquier
+                accidente o quebranto de salud que suceda dentro posterior a los entrenamientos realizados.
+                </p>
+                
+            <div className="flex flex-row space-x-6">
+                <label className="inline-flex items-center mt-3">
+                  <input type="checkbox" className="form-checkbox h-5 w-5 text-green-600" checked /><span className="ml-2 text-gray-700">Acepto</span>
+                </label>
+              </div>
+            <button onClick={onSubmit} className="mt-8 py-2 px-4 border-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
+              Reservar 
+            </button>
       </form>
      
       </div>
