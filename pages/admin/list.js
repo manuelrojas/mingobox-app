@@ -1,30 +1,48 @@
 import React, { useState, useEffect }  from 'react';
-// import { connectToDatabase } from "../../util/mongodb";
 import axios from 'axios';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function List() {
     const [value, setValue] = useState('');
+    const [date, setDate] = useState(new Date())
     const [newUsers, setNewUsers] = useState([]);
 
     useEffect(() => {
         axios({
             method: 'GET',
             url: '/api/user',
-            params:  value
+            params:  { sport: value, date }
           }).then(res => {
+              console.log(res);
               setNewUsers(res.data);
           })
-    }, [value]);
+    }, [value, date]);
+
+    const DatePickerField = ({ value, onChange }) => {
+        return (
+            <DatePicker
+                selected={(value && new Date(value)) || null}
+                onChange={onChange}
+            />
+        );
+      };
     return (
         <div class="w-min mx-min flex flex-col self-center content-center bg-white p-8 text-gray-700">
             <h1 class="font-semibold text-lg">Reservación</h1>
 
-            <select value={value} name="sport" onChange={(e) => { setValue(e.target.value)}}>
+            <select className="mt-2 mb-2" value={value} name="sport" onChange={(e) => { setValue(e.target.value)}}>
                 <option value="">Seleccione una disciplina</option>
                 <option value="Boxeo">Boxeo</option>
                 <option value="Volleyball">Volleyball</option>
                 <option value="Taekwondo">Taekwondo</option>
-            </select>     
+            </select> 
+            <div>
+             <DatePickerField value={date} onChange={(ev) => setDate(ev) } />  
+            </div>
+
+
+
          
 <table class="w-min mx-min flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
 			<thead class="text-white">

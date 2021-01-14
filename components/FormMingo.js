@@ -104,7 +104,7 @@ export function ListSymp({ onChange, value, disabled=false }) {
 
 const FormMingo = () => (
   <div>
-    <h1>Informacíon</h1>
+    <h1 className="font-bold text-xl m-2 text-green-600">Reserva para su Entrenamiento</h1>
     <Formik
       initialValues={{ 
           email: '', 
@@ -134,7 +134,7 @@ const FormMingo = () => (
       }}
       validate={values => {
         const errors = {};
-        const requiredLabel = '*';
+        const requiredLabel = '*Requerido';
         if (!values.hour) {
           errors.hour = requiredLabel;
         }
@@ -196,6 +196,7 @@ const FormMingo = () => (
         setFieldValue
       }) => (
         <form onSubmit={handleSubmit} className="w-full bg-white shadow p-8 text-gray-700">
+          <span className="text-red-600"> {errors.name && touched.name && errors.name} </span>
           <InputMingo
             id="name"
             type="text"
@@ -204,7 +205,7 @@ const FormMingo = () => (
             label={"Nombre Completo"}
             value={values.name}
           />
-          {errors.name && touched.name && errors.name}
+          <span className="text-red-600"> {errors.id && touched.id && errors.id} </span>
           <InputMingo
             id="id"
             type="text"
@@ -213,8 +214,8 @@ const FormMingo = () => (
             label={"Identificación"}
             value={values.id}
           />
-          {errors.id && touched.id && errors.id}
-
+         
+         <span className="text-red-600"> {errors.phone && touched.phone && errors.phone}</span>
           <InputMingo
             id="phone"
             type="text"
@@ -223,8 +224,8 @@ const FormMingo = () => (
             label={"Teléfono"}
             value={values.phone}
           />
-          {errors.phone && touched.phone && errors.phone}
-          
+        
+        <span className="text-red-600"> {errors.email && touched.email && errors.email} </span>
           <InputMingo
             id="email"
             type="email"
@@ -233,8 +234,8 @@ const FormMingo = () => (
             label={"Correo"}
             value={values.email}
           />
-          {errors.email && touched.email && errors.email}
-     
+         
+         <span className="text-red-600"> {errors.role && touched.role && errors.role} </span>
           <InputMingo
             id="role"
             type="text"
@@ -243,7 +244,7 @@ const FormMingo = () => (
             label={"Función"}
             value={values.role}
           />
-          {errors.role && touched.role && errors.role}
+           <span className="text-red-600"> {errors.org && touched.org && errors.org} </span>
           <InputMingo
             id="org"
             type="text"
@@ -252,7 +253,7 @@ const FormMingo = () => (
             label={"Organización"}
             value={values.org}
           />
-          {errors.org && touched.org && errors.org}
+       
           <div className="mt-4 mb-4">
             <span className="flex text-gray-600 text-md">Fecha</span> 
             <DatePickerField
@@ -262,6 +263,7 @@ const FormMingo = () => (
             />
           </div>
           <div className="mt-4 mb-4">
+             <span className="text-red-600"> {errors.hour && touched.hour && errors.hour} </span>
             <span className="flex text-gray-600 text-md">Hora de Ingreso</span> 
             <input 
               type="time" 
@@ -270,7 +272,7 @@ const FormMingo = () => (
               value={values.hour} 
               onChange={handleChange}
               min="06:00" max="22:00" />
-              {errors.hour && touched.hour && errors.hour}
+             
           </div>
 
           <div className="mb-4">
@@ -310,13 +312,14 @@ const FormMingo = () => (
           <ListSymp onChange={handleChange} value={values} />
 
 
-
+          <span className="text-red-600">  {errors.accept && touched.accept && errors.accept} </span>
           <div className="flex flex-row space-x-6">
+
             <label className="inline-flex items-center mt-3">
               <input onChange={handleChange} id={'accept'} name={'accept'} type="checkbox" className="form-checkbox h-5 w-5 text-green-600" value={values.accept}/><span className="ml-2 text-gray-700">Acepto</span>
             </label>
           </div>
-          {errors.accept && touched.accept && errors.accept}
+ 
           <button type="submit" disabled={isSubmitting} className="mt-8 py-2 px-4 border-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
            Reservar
           </button>

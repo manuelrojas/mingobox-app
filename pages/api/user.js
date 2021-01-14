@@ -22,15 +22,43 @@ export default async (req, res) => {
 
     if(req.method === 'GET') {
         const { db } = await connectToDatabase();
-        let value = req.query[0];
+        let value = req.query.sport;
 
-        if (value === undefined) { // category  not specified by user
+        const startDate = new Date(req.query.date); 
+        startDate.setSeconds(0);
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+
+        const dateMidnight = new Date(req.query.date); 
+        dateMidnight.setHours(23);
+        dateMidnight.setMinutes(59);
+        dateMidnight.setSeconds(59);
+
+        if (value === undefined || value === '') { // category  not specified by user
             value = /(.*?)/
-         }
+        }
 
         const users = await db
             .collection("users")
-            .find({ "sport": value })
+            .find({
+                    "sport": value,
+                    "$expr": {
+                      "$and": [
+                        {
+                          "$gte": [
+                            { "$dateFromString": { "dateString": "$date"}},
+                            startDate
+                          ]
+                        },
+                        {
+                          "$lte": [
+                            { "$dateFromString": { "dateString": "$date"}},
+                            dateMidnight
+                          ]
+                        }
+                      ]
+                    }
+            })
             .sort({ actualDate: -1 })
             .toArray();
 
