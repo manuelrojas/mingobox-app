@@ -10,10 +10,12 @@
     "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.0",
+    "formik": "^2.2.6",
     "mongodb": "^3.5.9",
     "next": "latest",
     "postcss": "^8.2.1",
     "react": "^16.13.1",
+    "react-datepicker": "^3.4.1",
     "react-dom": "^16.13.1",
     "react-qr-code": "^1.0.3",
     "tailwindcss": "^2.0.2"

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import QRCode from "react-qr-code";
 import { connectToDatabase } from "../../util/mongodb";
 import { ObjectId } from 'mongodb';
-import { ListSymp, QuestionSym } from '../../components/FormMingo';
+import axios from 'axios';
+import Router from 'next/router';
 
 const LabelCompo = ({ label, value }) => {
     return (
@@ -13,13 +14,13 @@ const LabelCompo = ({ label, value }) => {
     );
 };
 
-
 export default function Complete({ newUser }) {
     const user = JSON.parse(newUser);
+    const [value, setValue] = useState(user.temp);
     return (
         <div className="m-10  w-auto mx-auto max-w-3xl w-min flex flex-col  content-center bg-white shadow p-8 text-gray-700 rounded-lg">
-            <QRCode value={`https://mingobox-app.vercel.app/reserved/${user._id}`} />
-            <h1 className="mt-2 mb-2 font-semibold text-xl">Reservación</h1> 
+            <QRCode value={`https://mingobox-app.vercel.app/reservation/${user._id}`} />
+            <h1 className="mt-2 mb-2 ">Reservación</h1> 
             <LabelCompo value={user.name} label="Nombre Completo" />
             <LabelCompo value={user.id} label="Identificación" />
             <LabelCompo value={user.phone} label="Teléfono" />
@@ -30,30 +31,35 @@ export default function Complete({ newUser }) {
             <LabelCompo value={user.date} label="Fecha" />
             <LabelCompo value={user.sport} label="Disciplina" />
             <LabelCompo value={user.notes} label="Notas" />
-            <LabelCompo value={user.temp} label="Temperatura" />
+            <input
+                type="text"
+                id={"temp"}
+                name={"temp"}
+                value={value}
+                placeholder={'Temparatura'}
+                label={'Temparatura'}
+                className="tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500"
+                onChange={(e) => { setValue(e.target.value)}}
+            />
 
-            <ListSymp value={user} disabled={true} />
-
-            <div className="mt-8 flex flex-row space-x-6">
-                <span>¿Ha presentado alguno de los siguientes síntomas en las últimas 2 semanas?</span>
-            </div>
-            <QuestionSym group={"sys"} id={'sys1'} value={user.sys} />
-
-            <div className="mt-4 flex flex-row space-x-6">
-                <span>¿Ha tenido contacto con algún familiar o u otra persona cercana con los síntomas antes mencionados en las últimas dos semanas?</span>
-            </div>
-            <QuestionSym  group={"contact"} id={'contact2'} value={user.contact}  />
-
-            <div className="mt-4 flex flex-row space-x-6">
-                <span>¿Ha presentado alguno de los siguientes síntomas en las últimas 2 semanas? {user.accept}</span>
-            </div>
-            <QuestionSym group={"close"} id={'close3'} value={user.close} />
-
-            <div className="flex flex-row space-x-6">
-            <label className="inline-flex items-center mt-3">
-              <input id={'accept'} name={'accept'} type="checkbox" className="form-checkbox h-5 w-5 text-green-600" disabled checked={user.accept}/><span className="ml-2 text-gray-700">Acepto</span>
-            </label>
-          </div>
+            <button type="submit" onClick={() => {
+                axios({
+                    method: 'PUT',
+                    url: '/api/user',
+                    data: {
+                        id: user._id,
+                        update: {
+                            $set: { temp: value }
+                        },
+                        options: {}
+                    }
+                  }).then(() => {
+                    Router.push(`/admin/list`);
+                  })
+                
+             }} className="mt-8 py-2 px-4 border-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
+                 Actualizar
+            </button>
         </div>
     );  
 }
